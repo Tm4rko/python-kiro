@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width-device-width, initial-scale=1.0">
+    <title>Kiro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../static/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <div class="logo">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="logo-text">Kiro</div>
+            </div>
+            <div class="header-content">
+                <h1>Diario de Trading de Forex</h1>
+                <p class="tagline">Registra, analiza y mejora tus operaciones en el mercado de divisas</p>
+            </div>
+        </header>
+
+        <div class="stats-cards">
+            <div class="stat-card profit">
+                <h3><i class="fas fa-arrow-trend-up"></i> Beneficio Total</h3>
+                <div class="value">+$1,842.50</div>
+                <div class="change">+5.2% este mes</div>
+            </div>
+            <div class="stat-card loss">
+                <h3><i class="fas fa-arrow-trend-down"></i> Pérdida Máxima</h3>
+                <div class="value">-$328.00</div>
+                <div class="change">-2.1% este mes</div>
+            </div>
+            <div class="stat-card win-rate">
+                <h3><i class="fas fa-trophy"></i> Tasa de Acierto</h3>
+                <div class="value">68.4%</div>
+                <div class="change">+4.3% este mes</div>
+            </div>
+            <div class="stat-card">
+                <h3><i class="fas fa-exchange-alt"></i> Operaciones</h3>
+                <div class="value">47</div>
+                <div class="change">19 ganadas / 9 perdidas</div>
+            </div>
+        </div>
+
+        <div class="form-container">
+            <h2><i class="fas fa-plus-circle"></i> Registrar Nueva Operación</h2>
+            <form id="tradingForm" method="POST">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="tradeDate"><i class="far fa-calendar"></i> Fecha y Hora*</label>
+                        <input type="datetime-local" id="tradeDate" name="tradeDate" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="currencyPair"><i class="fas fa-euro-sign"></i> Par de Divisas*</label>
+                        <select id="currencyPair" name="currencyPair" required>
+                            <option value="">Seleccionar...</option>
+                            <option value="EUR/USD">EUR/USD</option>
+                            <option value="GBP/USD">GBP/USD</option>
+                            <option value="USD/JPY">USD/JPY</option>
+                            <option value="AUD/USD">AUD/USD</option>
+                            <option value="USD/CAD">USD/CAD</option>
+                            <option value="NZD/USD">NZD/USD</option>
+                            <option value="USD/CHF">USD/CHF</option>
+                            <option value="XAU/USD">XAU/USD (Oro)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="direction"><i class="fas fa-arrows-alt-h"></i> Dirección*</label>
+                        <select id="direction" name="direction" required>
+                            <option value="">Seleccionar...</option>
+                            <option value="Compra">Compra (Long)</option>
+                            <option value="Venta">Venta (Short)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="positionSize"><i class="fas fa-chart-pie"></i> Tamaño (Lotes)*</label>
+                        <input type="number" id="positionSize" name="positionSize" step="0.01" min="0.01" required>
+                    </div>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="entryPrice"><i class="fas fa-arrow-right-to-bracket"></i> Entrada*</label>
+                        <input type="number" id="entryPrice" name="entryPrice" step="0.00001" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exitPrice"><i class="fas fa-arrow-right-from-bracket"></i> Salida*</label>
+                        <input type="number" id="exitPrice" name="exitPrice" step="0.00001" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="stopLoss"><i class="fas fa-shield-alt"></i> Stop Loss (SL)</label>
+                        <input type="number" id="stopLoss" name="stopLoss" step="0.00001">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="takeProfit"><i class="fas fa-bullseye"></i> Take Profit (TP)</label>
+                        <input type="number" id="takeProfit" name="takeProfit" step="0.00001">
+                    </div>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="result"><i class="fas fa-medal"></i> Resultado*</label>
+                        <select id="result" name="result" required>
+                            <option value="">Seleccionar...</option>
+                            <option value="profit">Ganancia</option>
+                            <option value="loss">Pérdida</option>
+                            <option value="breakeven">Break Even</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="profitLoss"><i class="fas fa-coins"></i> Beneficio/Pérdida*</label>
+                        <input type="number" id="profitLoss" name="profitLoss" step="0.01" required>
+                    </div>
+
+                </div>
+
+                <div class="action-buttons">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Guardar Operación
+                    </button>
+                    <button type="reset" class="btn btn-outline">
+                        <i class="fas fa-eraser"></i> Limpiar Formulario
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="chart-container">
+            <h2><i class="fas fa-chart-line"></i> Rendimiento Mensual</h2>
+            <div class="chart-placeholder">
+                Gráfico de Rendimiento (USD)
+            </div>
+        </div>
+
+        <div class="table-container">
+            <h2><i class="fas fa-history"></i> Historial de Operaciones</h2>
+            <table id="tradingJournal">
+                <thead>
+                    <tr>
+                        <th><i class="far fa-calendar"></i> Fecha/Hora</th>
+                        <th><i class="fas fa-euro-sign"></i> Par</th>
+                        <th><i class="fas fa-arrows-alt-h"></i> Dirección</th>
+                        <th><i class="fas fa-chart-pie"></i> Tamaño</th>
+                        <th><i class="fas fa-arrow-right-to-bracket"></i> Entrada</th>
+                        <th><i class="fas fa-arrow-right-from-bracket"></i> Salida</th>
+                        <th><i class="fas fa-arrow-right-to-bracket"></i> StopLoss</th>
+                        <th><i class="fas fa-arrow-right-from-bracket"></i> TakeProfit</th>
+                        <th><i class="fas fa-medal"></i> Resultado</th>
+                        <th><i class="fas fa-coins"></i> B/P (USD)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for entrada in entradas %}
+                    {% set row_class = 'trade-buy' if entrada.direction == 'Compra' else 'trade-sell' %}
+                    <tr class="{{ row_class }}">
+                        <td>{{entrada.tradeDate}}</td>
+                        <td>{{entrada.currencyPair}}</td>
+                        <td>{{entrada.direction}}</td>
+                        <td>{{entrada.positionSize}}</td>
+                        <td>{{entrada.entryPrice}}</td>
+                        <td>{{entrada.exitPrice}}</td>
+                        <td>{{entrada.stopLoss}}</td>
+                        <td>{{entrada.takeProfit}}</td>
+                        <!--<td><span class="loss">{{entrada.result}}</span></td>
+                        <td class="loss">{{entrada.profitLoss}}</td>-->
+                        {% if entrada.result == 'profit' %}
+                            <td><span class="profit">Ganancia</span></td>
+                            <td class="profit">{{ entrada.profitLoss }}</td>
+                        {% elif entrada.result == 'loss' %}
+                            <td><span class="loss">Pérdida</span></td>
+                            <td class="loss">{{ entrada.profitLoss }}</td>
+                        {% else %}
+                            <td><span>{{ entrada.result }}</span></td>
+                            <td>{{ entrada.profitLoss }}</td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!--Codigo para la API-->
+        <div class="forex-widget">
+          <h3><i class="fas fa-globe"></i> Cotizaciones Forex</h3>
+          <div class="forex-rate">
+            <span>EUR/USD:</span> <span id="eurUsdRate">Cargando...</span>
+          </div>
+          <div class="forex-rate">
+            <span>GBP/USD:</span> <span id="gbpUsdRate">Cargando...</span>
+          </div>
+        </div>
+        <!-- fin del codigo de API-->
+
+
+        <div class="pairs-container">
+            <h2><i class="fas fa-globe"></i> Pares Populares</h2>
+            <div class="pairs-grid">
+                <div class="pair-item active">
+                    <div class="pair-name">EUR/USD</div>
+                    <div class="pair-price">1.0874 <span class="profit">+0.12%</span></div>
+                </div>
+                <div class="pair-item">
+                    <div class="pair-name">GBP/USD</div>
+                    <div class="pair-price">1.2732 <span class="profit">+0.08%</span></div>
+                </div>
+                <div class="pair-item">
+                    <div class="pair-name">USD/JPY</div>
+                    <div class="pair-price">140.65 <span class="negative">-0.24%</span></div>
+                </div>
+                <div class="pair-item">
+                    <div class="pair-name">AUD/USD</div>
+                    <div class="pair-price">0.6621 <span class="profit">+0.35%</span></div>
+                </div>
+                <div class="pair-item">
+                    <div class="pair-name">USD/CAD</div>
+                    <div class="pair-price">1.3387 <span class="negative">-0.18%</span></div>
+                </div>
+                <div class="pair-item">
+                    <div class="pair-name">XAU/USD</div>
+                    <div class="pair-price">1968.40 <span class="profit">+0.42%</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Kiro - © 2025 | Diseñado para traders profesionales</p>
+            <p><i class="fas fa-sync-alt"></i> Última actualización: 09/06/2025 15:42 GMT</p>
+        </div>
+    </div>
+</body>
+</html>
